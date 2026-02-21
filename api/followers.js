@@ -1,20 +1,7 @@
 export default async function handler(req, res) {
 
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    return res.status(200).end();
-  }
-
-  // Set CORS headers for actual request
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  const clientId = process.env.SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+  const clientId = process.env.1c8cc9c4cd6d4e9ebea8608fd65e0ace;
+  const clientSecret = process.env.bcd26b8c7f1047e5a3bad5d10af50907;
 
   const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
