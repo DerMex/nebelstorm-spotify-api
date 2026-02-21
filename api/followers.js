@@ -11,7 +11,8 @@ export default async function handler(req, res) {
     method: 'POST',
     headers: {
       'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64'),
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
     },
     body: 'grant_type=client_credentials'
   });
@@ -25,19 +26,17 @@ export default async function handler(req, res) {
   const artistResponse = await fetch(
     'https://api.spotify.com/v1/artists/073You0CZI4IlhXhpuzZ6x',
     {
+      method: 'GET',
       headers: {
-        'Authorization': 'Bearer ' + tokenData.access_token
+        'Authorization': 'Bearer ' + tokenData.access_token,
+        'Accept': 'application/json'
       }
     }
   );
 
   const artistData = await artistResponse.json();
 
-  if (!artistData.followers) {
-    return res.status(500).json({ error: 'Followers missing', debug: artistData });
-  }
-
   return res.status(200).json({
-    current: artistData.followers.total
+    fullResponse: artistData
   });
 }
